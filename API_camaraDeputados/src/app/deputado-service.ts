@@ -13,5 +13,9 @@ export class DeputadoService {
   ListaDeputados(): Observable<RespostaAPI> {
     return this.#HTTP.get<RespostaAPI>(`${this.APIUrl}/deputados?ordem=ASC&ordenarPor=nome`);
   };
+
+  DeputadosUF(SiglaEstado: string): Observable<RespostaAPI> {
+    return this.#HTTP.get<RespostaAPI>(`${this.APIUrl}/deputados?ordem=ASC&ordenarPor=nome&siglaUf=${SiglaEstado}`);
+  }
   
 }
