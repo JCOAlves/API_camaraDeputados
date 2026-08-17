@@ -30,11 +30,9 @@ export class BuscaDeputados {
   onSubmit(){
     if(this.formDeputado.valid){
       console.log(this.formDeputado.value.siglaUF)
-      this.#deputadoService.DeputadosUF(this.formDeputado.value.siglaUF="RN").subscribe(res => {
-        console.log("res.dados")
-        this.deputados.set(res.dados)
+      this.#deputadoService.DeputadosUF(String(this.formDeputado.value.siglaUF)).subscribe(res => {
+        (res.dados).length > 0 ? this.deputados.set(res.dados) : alert("Não há deputados associados a essa sigla ou sigla invalida")
       })
-      console.log("ruithr")
       return;
     }
   }

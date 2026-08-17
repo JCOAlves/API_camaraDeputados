@@ -2,28 +2,30 @@
     <form action="" method="post" [formGroup]="formDeputado" (ngSubmit)="onSubmit()" class="border max-h-100 w-100 rounded-[10px] p-5 flex flex-col ml-auto mr-auto">
         <h2 class="font-medium text-[20px] text-center">Busca de Deputado por UF</h2>
             <br/>
-        <label for="siglaUF" class="mb-1">Busca por partido <span class="text-red-500">*</span></label>
+        <label for="siglaUF" class="mb-1">Busca por estado da federal<span class="text-red-500">*</span></label>
         <input type="text" name="siglaUF" id="siglaUF" formControlName="siglaUF" placeholder="Sigla do Estado" class="p-2 border rounded" required maxlength="2">
             <br/>
         <button type="submit" class="p-3 bg-blue-200 rounded-[10px]">Pesquisar</button>
 
     </form>
-    <table class="mr-auto ml-auto">
-        <tr class="bg-blue-100 border">
-            <th class="w-30 p-3 text-center">Foto</th>
-            <th class="w-50 p-3 text-center">Nome</th>
-            <th class="w-20 p-3 text-center">Email</th>
-            <th class="w-20 p-3 text-center">Partido</th>
-            <th class="w-18 p-3 text-center">UF</th>
-        </tr>
-        @for (item of deputados(); track item.id) {
-            <tr class="border">
-                <th class="flex flex-col justify-center content-center text-center"><img class="w-30 ml-auto mr-auto" [src]="item.urlFoto" alt="Foto deputado" width=""></th>
-                <th class="text-center">{{item.nome}}</th>
-                <th class="text-center">{{item.email}}</th>
-                <th class="text-center">{{item.siglaPartido}}</th>
-                <th>{{item.siglaUf}}</th>
+    @if ((deputados()).length > 0) {
+        <table class="mr-auto ml-auto">
+            <tr class="bg-blue-100 border">
+                <th class="w-30 p-3 text-center">Foto</th>
+                <th class="w-50 p-3 text-center">Nome</th>
+                <th class="w-20 p-3 text-center">Email</th>
+                <th class="w-20 p-3 text-center">Partido</th>
+                <th class="w-18 p-3 text-center">UF</th>
             </tr>
-        }
-    </table>
+            @for (item of deputados(); track item.id) {
+                <tr class="border">
+                    <th class="flex flex-col justify-center content-center text-center"><img class="w-30 ml-auto mr-auto" [src]="item.urlFoto" alt="Foto deputado" width=""></th>
+                    <th class="text-center">{{item.nome}}</th>
+                    <th class="text-center">{{item.email}}</th>
+                    <th class="text-center">{{item.siglaPartido}}</th>
+                    <th>{{item.siglaUf}}</th>
+                </tr>
+            }
+        </table>
+    }
 </main>
