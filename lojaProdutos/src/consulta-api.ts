@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import Produto from './typeProduto';
 
@@ -9,19 +9,16 @@ export class ConsultaAPI {
   private HTTP = inject(HttpClient);
   private rotaAPI: string = "http://localhost:3000";
 
-  listaProdutos(): Produto[] | null {
-    let lista: Produto[] | null = [];
-    this.HTTP.get<Produto[] | null>(`${this.rotaAPI}/produtos`).subscribe({
-      next: (produtos) => {
-        lista = produtos;
-        lista ? console.log("Produtos listados com sucesso!") : console.log("Não há produtos listados")
-      },
-      error: (err) => {
-        console.error("Erro na requisição ao servidor: ", err.message || err);
-      },
-    })
-    return lista;
-  };
+  // Cria um sinal reativo para armazenar a lista
+  produtos = signal<Produto[]>([]);
 
-  
+  listaProdutos(): void {
+    this.HTTP.get<Produto[]>(`${this.rotaAPI}/produtos`).subscribe({
+      next: (dados) => {
+        this.produtos.set(dados); // Atualiza o sinal
+        console.log("Produtos listados com sucesso!");
+      },
+      error: (err) => console.error("Erro: ", err),
+    });
+  }
 }

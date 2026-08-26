@@ -1,6 +1,9 @@
-@if (listaProdutos()) {
+@if (listaProdutos()?.length) {
     @for (item of listaProdutos(); track item.ID) {
-        <div>{{item.ID}}</div>
+        <div>{{item.ID}} - {{item.nome}}</div>
     }
+} @else {
+    <div>Produtos não encontrados</div>
 }
+regtueugt
 <router-outlet />
