@@ -1,2 +1,6 @@
-
+@if (listaProdutos()) {
+    @for (item of listaProdutos(); track item.ID) {
+        <div>{{item.ID}}</div>
+    }
+}
 <router-outlet />

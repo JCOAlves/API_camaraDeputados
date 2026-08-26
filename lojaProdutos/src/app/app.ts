@@ -1,5 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { ConsultaAPI } from '../consulta-api';
+import Produto from '../typeProduto';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +10,11 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('lojaProdutos');
+  listaProdutos = signal<Produto[] | null>([]);
+
+  private API = inject(ConsultaAPI);
+
+  ngOnInit(){
+    this.listaProdutos.set(this.API.listaProdutos())
+  }
 }
