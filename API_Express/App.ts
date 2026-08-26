@@ -1,7 +1,9 @@
 import express, { type Express, type Request, type Response } from 'express';
+import cors from "cors";
 import Rotas from "./Rotas.ts";
 
 const app: Express = express();
+app.use(cors()) // Importação para habilitar requisições do frontend
 
 app.get('/', (req: Request, res: Response) => {
   res.redirect("/produtos")
