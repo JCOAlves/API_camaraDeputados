@@ -12,10 +12,10 @@ import Produto from '../typeProduto';
 export class App implements OnInit{
   listaProdutos = signal<Produto[] | null>([]);
 
-  private API = inject(ConsultaAPI);
+  #API = inject(ConsultaAPI);
 
   ngOnInit(){
-    this.API.listaProdutos().subscribe({
+    this.#API.listaProdutos().subscribe({
       next: (produtos) => this.listaProdutos.set(produtos),
       error: (err) => console.error("Erro na requisição de produtos", err)
     });

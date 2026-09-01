@@ -12,7 +12,12 @@ export class ConsultaAPI {
 
   listaProdutos(): Observable<Produto[] | null> {
     console.log("Produto buscado")
-    return this.#HTTP.get<Produto[] | null>(`${this.#rotaAPI}/produtos`)
+    return this.#HTTP.get<Produto[] | null>(`${this.#rotaAPI}/produtos`);
+  };
+
+  listaProdutoID(ID: number): Observable<Produto | null | undefined>{
+    console.log("Produto listado por ID")
+    return this.#HTTP.get<Produto | null | undefined>(`${this.#rotaAPI}/produtos/${ID}`);
   };
 
   
