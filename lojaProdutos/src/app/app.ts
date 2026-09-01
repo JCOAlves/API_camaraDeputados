@@ -15,14 +15,9 @@ export class App implements OnInit{
   private API = inject(ConsultaAPI);
 
   ngOnInit(){
-    if(this.API.produtos()){
-      console.log(this.API.produtos())
-      this.listaProdutos.set(this.API.produtos())
-
-    } else{
-      console.log("bada")
-    }
-  }
-
-  
+    this.API.listaProdutos().subscribe({
+      next: (produtos) => this.listaProdutos.set(produtos),
+      error: (err) => console.error("Erro na requisição de produtos", err)
+    });
+  };
 }
